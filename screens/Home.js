@@ -20,11 +20,17 @@ class Home extends React.Component {
         }
     }
 
+    // add data
     storeTodo = () => {
         const newTodoKey = firebase.database().ref().child('todos').push().key
         firebase.database().ref('todos/').update({
             [newTodoKey] : this.state.todo          
         });
+    }
+
+    // hapus data
+    removeTodo = (key) => {
+        firebase.database().ref('todos/' + key).remove();
     }
 
     componentDidMount() {
@@ -35,6 +41,7 @@ class Home extends React.Component {
     }
 
     render() {
+        // ubah object kedalam array
         const todos = !this.state.todos ? [] : Object.keys(this.state.todos).map(key => {
             return {
                 key: key,
@@ -53,7 +60,17 @@ class Home extends React.Component {
                 />
                 <FlatList 
                     data={todos}
-                    renderItem={({item}) => <Text>{item.text}</Text>}
+                    renderItem={({item}) => {
+                        return (
+                            <View>
+                                <Text>{item.text}</Text>
+                                <Button 
+                                    title = 'Hapus'
+                                    onPress= {() => this.removeTodo(item.key)}
+                                />
+                            </View>
+                        )
+                    }}
                 />
             </View>
         )
