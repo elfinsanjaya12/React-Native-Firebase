@@ -1,24 +1,27 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, Text, Button, TextInput } from 'react-native';
-import firebase from '../firebase';
-import TodoList from '../components/TodoList'
 
 class Home extends React.Component {
     static navigationOptions = {
         title : 'Home',
         headerStyle: {
-            backgroundColor: '#0091EA',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
+            backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
             fontWeight: 'bold',
         },
     }
     
-
     render() {
         return (
-            <TodoList navigate={this.props.navigation}></TodoList>
+            <View style={{ flex: 1, flexDirection: 'column', margin: 32}}>
+                <Button 
+                    title = "Tambah Rencana"
+                    backgroundColor = '#f4511e'
+                    onPress={() => this.props.navigation.navigate('TodoPageAdd')}
+                />
+            </View>
         )
     }
 }

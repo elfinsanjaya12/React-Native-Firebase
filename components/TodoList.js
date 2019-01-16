@@ -1,43 +1,51 @@
 import React from 'react';
 import firebase from '../firebase';
-import { StyleSheet, View, FlatList, ActivityIndicator, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, FlatList, Alert, ActivityIndicator, Text, ScrollView } from 'react-native';
 import { Button, Card, Icon } from 'react-native-elements';
 import List from '../components/List'
-import Accordion from 'react-native-collapsible/Accordion';
+import {Accordion} from 'react-native-accordion';
+
 
 class TodoList extends React.Component {
     constructor(props){
-        super(props);
-        this.state = {
-            todo: '',
-            todos : null,
-            loadData: true,
-        }
-        this.renderHeader = this.renderHeader.bind(this)
+      super(props)
+      this.state = {
+        todo: '',
+        loadData: true,
+        todos: null
+      }
+      this.renderHeader = this.renderHeader.bind(this)
     }
 
     componentDidMount() {
-        firebase.database().ref('todos/').on('value', (snapshot) => {
-          const todosFiles = snapshot.val();
-          this.setState({todos: todosFiles, loadData: false})
-        })
+      firebase.database().ref('todos/').on('value', (snapshot) => {
+        const todosFiles = snapshot.val();
+
+        this.setState({todos: todosFiles, loadData: false})
+      })
+
     }
 
     renderHeader(todos) {
-        return (
-          <List list={todos} navigate={ this.props.navigate } />
-        );
-      }
-    
+      return (
+        <List list={todos} navigate={ this.props.navigate } />
+      );
+    }
+
     renderContent(todos) {
-    return (
+      return (
         <View style={styles.panel}>
-        <Text>{todos.description}</Text>
+          <Text>{todos.description}</Text>
         </View>
       );
     }
 
+    deleteTodo = (key) => {
+      firebase.database().ref('todos/'+ key).remove()
+    }
+
     render() {
+        const { navigate } = this.props.navigate
         const todos = !this.state.todos ? [] : Object.keys(this.state.todos).map( key => {
         return {
             key: key,
@@ -48,7 +56,18 @@ class TodoList extends React.Component {
 
         return (
             <ScrollView style={styles.container} >
-              <Card title="DAFTAR TODO">
+
+            <Card>
+              <Button
+                icon={<Icon name='add' color='#ffffff' />}
+                backgroundColor='#000000'
+                buttonStyle={styles.buttonStyle}
+                title="Add Todo"
+                onPress={() => console.log("Ini Saya Pencet Bisa Bro")}/>
+            </Card>
+
+              {/* Menampilkan isi dari firebase todos */}
+              <Card title="Rencana Harian">
                 <Accordion
                   sections={todos}
                   renderHeader={this.renderHeader}
