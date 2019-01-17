@@ -3,9 +3,9 @@ import { View, TextInput, StyleSheet, Button, Alert, ScrollView } from 'react-na
 import firebase from '../firebase'
 
 
-class TodoPageAdd extends React.Component {
+class TodoPageEdit extends React.Component {
   static navigationOptions = {
-    title: 'To Do - Add',
+    title: 'To Do - Edit',
     headerStyle: {
       backgroundColor: '#f4511e',
     },
@@ -15,42 +15,51 @@ class TodoPageAdd extends React.Component {
     },
   }
 
-  constructor(){
-    super();
-    this.state = {
-      title : '',
-      deskripsi : '',
-      todos: null
+  constructor(props){
+    const title = props.navigation.getParam('title')
+    const deskripsi = props.navigation.getParam('deskripsi')
+    const key = props.navigation.getParam('key')
+		super(props)
+		this.state = {
+      key: key,
+      titleEdit: title,
+      deskripsiEdit: deskripsi,
     }
+	}
+
+  updateTodo = (key) => {
+    const { titleEdit, deskripsiEdit } = this.state
+   
+    firebase.database().ref('todos/' + key).set({
+        titleEdit: titleEdit,
+        deskripsiEdit: deskripsiEdit,
+    })
+    Alert.alert('Berhasil', 'Todo Berhasil Diubah')
+    this.props.navigation.navigate('Home')
   }
 
-    // add data
-    storeTodo = () => {
-        const newTodoKey = firebase.database().ref().child('todos').push().key
-        firebase.database().ref('todos/').update({
-            [newTodoKey] : this.state
-        });
-        Alert.alert('Berhasil', 'Todo Berhasil Ditambahkan')
-        this.props.navigation.navigate('Home')
-    }
-
   render() {
+    const { titleEdit, deskripsiEdit, key } = this.state
+  
+    console.log(key)
       return (
         <ScrollView>
         <View style={styles.container}>
             <TextInput
                 style={styles.inputBox}  
                 placeholder="Title"
-                onChangeText={(text) => this.setState({title: text})}
+                onChangeText={(val) => this.setState({titleEdit: val})}
+                value={titleEdit}
             />
             <TextInput
                 style={styles.inputBox}  
                 placeholder="Deskripsi"
-                onChangeText={(text) => this.setState({deskripsi: text})}
+                onChangeText={(val) => this.setState({deskripsiEdit: val})}
+                value={deskripsiEdit}
             />
             <Button
               title="Simpan"
-              onPress={() => this.storeTodo()}
+              onPress={() => this.updateTodo(key)}
             />
       </View>
       </ScrollView>
@@ -76,4 +85,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TodoPageAdd;
+export default TodoPageEdit;

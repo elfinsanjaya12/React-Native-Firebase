@@ -1,2 +1,2 @@
 # React-Native-Firebase
-Create + Read + Remove
+Create + Read + Update + Delete + Authentication
