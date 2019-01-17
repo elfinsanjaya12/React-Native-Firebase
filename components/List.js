@@ -4,6 +4,12 @@ import { Text, Button, Card, Icon, ListItem } from 'react-native-elements';
 import firebase from '../firebase';
 
 class List extends React.Component {
+  // fungsi delete
+    deleteTodo = (key) => {
+      firebase.database().ref('todos/' + key).remove()
+      Alert.alert('Berhasil', 'Todo Berhasil Dihapus')
+    }
+
     render(){   
         const { list, navigate } = this.props
         return(
