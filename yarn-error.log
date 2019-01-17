@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add native-base --save
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-collapsible
 
 PATH: 
   C:\Users\Elfin Sanjaya\Documents\Software\cmder\bin;C:\Users\Elfin Sanjaya\Documents\Software\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Elfin Sanjaya\Documents\Software\cmder\vendor\conemu-maximus5;C:\Users\Elfin Sanjaya\Documents\Software\cmder\vendor\conemu-maximus5\ConEmu;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\Users\Elfin Sanjaya\AppData\Local\Microsoft\WindowsApps;C:\Users\Elfin Sanjaya\AppData\Roaming\npm;C:\Users\Elfin Sanjaya\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Elfin Sanjaya\AppData\Roaming\Composer\vendor\bin;C:\Users\Elfin Sanjaya\AppData\Local\Yarn\bin;C:\Program Files\Git\mingw64;C:\Program Files\Git\usr\bin;C:\Users\Elfin Sanjaya\Documents\Software\cmder
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Elfin Sanjaya\Documents\andaglos-developer-academy\Android\React-Native-Firebase\node_modules\@babel\generator\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Elfin Sanjaya\Documents\andaglos-developer-academy\Android\React-Native-Firebase\node_modules\react-native-elements\node_modules\.bin'
 
 npm manifest: 
   {
@@ -31,7 +31,6 @@ npm manifest:
       "firebase": "^5.7.3",
       "react": "16.5.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-      "react-native-collapsible": "^1.4.0",
       "react-native-elements": "^0.19.1",
       "react-navigation": "^3.0.9",
       "react-redux": "^6.0.0",
@@ -4886,13 +4885,6 @@ Lockfile:
     version "2.2.5"
     resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
     integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
-  
-  react-native-collapsible@^1.4.0:
-    version "1.4.0"
-    resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-1.4.0.tgz#ec03cac361178319b77bb9993b73677356dd89d2"
-    integrity sha512-lf2U3gRHTNakqtN04NLJkmF02XaOF/DPOTGlwK8yrn85wMAdRaPpD0fnb7RvH4OID3SmxXBTWzZqkBTmasJyIQ==
-    dependencies:
-      prop-types "^15.6.2"
   
   react-native-elements@^0.19.1:
     version "0.19.1"
