@@ -1,6 +1,7 @@
 import React, {Component } from 'react'
 import { StyleSheet, View, TextInput, FlatList, TouchableNativeFeedback, Alert } from 'react-native';
 import { Text, Button, Card, Divider, Icon } from 'react-native-elements';
+import firebase from '../firebase'
 
 class TodoEdit extends Component {
   constructor(props){
@@ -12,6 +13,17 @@ class TodoEdit extends Component {
       todoDescription: description,
 		}
   }
+
+  updateTodo = (key) => {
+    const { todoTitle, todoDescription } = this.state
+    firebase.database().ref('todos/' + key).set({
+      todoTitle: todoTitle,
+      todoDescription: todoDescription,
+    })
+    Alert.alert('Berhasil', 'Todo Berhasil Diubah')
+    this.props.navigate.navigate('Home')
+  }
+
   
   render() {
     const { key } = this.props.navigate.state.params.todoList
@@ -24,17 +36,28 @@ class TodoEdit extends Component {
           <Card>
             <Text style={{color: '#00BCD4'}}> Todo Title </Text>
             <TextInput style={{height: 35}}
+              onChangeText={(value) => this.setState({todoTitle: value})}
               value={todoTitle}
             />
           </Card>
+
           <Card>
             <Text style={{color: '#00BCD4'}}> Todo Description </Text>
             <TextInput style={{height: 300}}
               editable = {true}
               multiline = {true}
               numberOfLines = {10}
+              onChangeText={(value) => this.setState({todoDescription: value})}
               value={todoDescription}
             />
+          </Card>
+
+          <Card style={{position:'absolute', bottom:0,}}>
+            <Button
+              backgroundColor='#03A9F4'
+              buttonStyle={styles.buttonStyle}
+              title="EDIT TODO"
+              onPress={() => this.updateTodo(key)}/>
           </Card>
         </View>
       </TouchableNativeFeedback>
