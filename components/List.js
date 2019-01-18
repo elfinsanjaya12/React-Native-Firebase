@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, Alert } from 'react-native';
-import { Text, Button, Card, Icon, ListItem } from 'react-native-elements';
+import { Text, Icon, ListItem } from 'react-native-elements';
 import firebase from '../firebase';
 
 class List extends React.Component {
-  // fungsi delete
+    // fungsi delete
     deleteTodo = (key) => {
       firebase.database().ref('todos/' + key).remove()
       Alert.alert('Berhasil', 'Todo Berhasil Dihapus')
-    }
+    }    
 
     render(){   
         const { list, navigate } = this.props
@@ -17,8 +17,7 @@ class List extends React.Component {
             <Icon name='edit'
               type='materialIcons'
               color='#4CAF50'
-              onPress={() => navigate.navigate("EditPage", {todoList: list})}
-
+              onPress={() => navigate.navigate("EditTodo",{todoList: list})}
             />
 
             <Text h1>|</Text>

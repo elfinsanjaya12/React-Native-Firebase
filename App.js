@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './screens/Home';
 import TodoPage from './screens/TodoPage';
-// import TodoPageEdit from './screens/TodoPageEdit';
+import EditTodo from './screens/EditTodo';
 
 
 const RootStack = createStackNavigator({
@@ -13,11 +13,11 @@ const RootStack = createStackNavigator({
   TodoPage :{
     screen : TodoPage
   },
-  // TodoPageEdit :{
-  //   screen: TodoPageEdit
-  // }
+  EditTodo :{
+    screen: EditTodo
+  }
 }, {
-  initialRootName: 'TodoPageEdit'
+  initialRootName: 'Home'
 });
 
 export default createAppContainer(RootStack);
